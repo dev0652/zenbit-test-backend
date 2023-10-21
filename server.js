@@ -5,16 +5,12 @@ import app from './app.js';
 
 // ##################################
 
-dotenv.config();
+// dotenv.config();
+dotenv.config({ path: './.env' });
 const { DB_HOST, PORT } = process.env;
 
 mongoose
-  .connect(DB_HOST, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-  })
+  .connect(DB_HOST)
   .then(() => {
     app.listen(PORT, () => {
       console.log(
