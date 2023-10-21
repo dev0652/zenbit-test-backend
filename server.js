@@ -1,16 +1,20 @@
 import mongoose from 'mongoose';
-// import dotenv from 'dotenv';
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import { exit } from 'node:process';
 import app from './app.js';
 
 // ##################################
 
-// dotenv.config();
+dotenv.config();
 const { DB_HOST, PORT } = process.env;
 
 mongoose
-  .connect(DB_HOST)
+  .connect(DB_HOST, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     app.listen(PORT, () => {
       console.log(
