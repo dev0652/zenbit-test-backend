@@ -76,24 +76,21 @@ const verify = async (req, res) => {
 
 // Log in
 const login = async (req, res) => {
-  const { email: reqEmail, password: reqPass } = req.body;
+  const { email, password } = req.body;
 
-  const user = await User.findOne({ email: reqEmail });
+  const user = await User.findOne({ email });
   if (!user) throw HttpError(401, authErrorMsg);
   if (!user.verify) throw HttpError(401, verifyEmailMsg);
 
-  const { email, password, id } = user;
-
-  const isPasswordValid = await bcrypt.compare(reqPass, password); // As of bcryptjs 2.4.0, 'compare' returns a promise if callback (passed as the third argument) is omitted
+  const isPasswordValid = await bcrypt.compare(password, user.password); // As of bcryptjs 2.4.0, 'compare' returns a promise if callback (passed as the third argument) is omitted
   if (!isPasswordValid) throw HttpError(401);
 
-  const payload = { id };
-  const secret = JWT_SECRET;
-  const token = jwt.sign(payload, secret, { expiresIn: '23h' });
+  const payload = { id: user._id };
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '23h' });
 
-  await User.findByIdAndUpdate(id, { token });
+  await User.findByIdAndUpdate(user._id, { token });
 
-  res.json({ token, user: { name: user.name, email } });
+  res.json({ token, user: { name: user.name, email: user.email } });
 };
 
 // ********************************************************
