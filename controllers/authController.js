@@ -21,7 +21,7 @@ const verifyEmailMsg = 'You need to verify your email first';
 const makeVerificationEmail = (email, verificationToken) => ({
   to: email,
   subject: 'Verify your email',
-  html: `Please follow <a href="${BASE_URL}/api/users/verify/${verificationToken}" target="_blank">this link</a> to verify your email.`,
+  html: `Please follow <a href="${BASE_URL}/api/auth/verify/${verificationToken}" target="_blank">this link</a> to verify your email.`,
 });
 
 // ********************************************************

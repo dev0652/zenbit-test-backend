@@ -1,1 +1,1 @@
-export { default as usersSchemas } from './usersSchemas.js';
+export { default as authSchemas } from './authSchemas.js';
