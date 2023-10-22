@@ -26,7 +26,7 @@ const makeVerificationEmail = (email, verificationToken) => ({
 
 // ********************************************************
 
-// Create an account
+// Register / sign up
 const register = async (req, res) => {
   const { email, password } = req.body;
 

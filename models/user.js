@@ -1,11 +1,8 @@
-// import mongoose from 'mongoose';
 import { Schema, model } from 'mongoose';
 import { handleSaveError, handleUpdateValidate } from './hooks.js';
 import emailRegexp from '../constants/user-constants.js';
 
 // ##############################################
-
-// mongoose.Schema.Types.String.checkRequired((v) => v != null);
 
 const userSchema = new Schema(
   {

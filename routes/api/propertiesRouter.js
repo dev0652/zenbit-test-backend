@@ -5,6 +5,6 @@ import { propertiesController as controller } from '../../controllers/index.js';
 
 const propertiesRouter = express.Router();
 
-propertiesRouter.get('/', controller.getAll);
+propertiesRouter.get('/', controller.getProperties);
 
 export default propertiesRouter;
