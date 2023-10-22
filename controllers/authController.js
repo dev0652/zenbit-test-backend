@@ -85,7 +85,7 @@ const login = async (req, res) => {
   const { email, password, id } = user;
 
   const isPasswordValid = await bcrypt.compare(reqPass, password); // As of bcryptjs 2.4.0, 'compare' returns a promise if callback (passed as the third argument) is omitted
-  if (!isPasswordValid) throw HttpError(401, 'in isPasswordValid');
+  if (!isPasswordValid) throw HttpError(401);
 
   const payload = { id };
   const secret = JWT_SECRET;
@@ -93,7 +93,7 @@ const login = async (req, res) => {
 
   await User.findByIdAndUpdate(id, { token });
 
-  res.json({ token, user: { email } });
+  res.json({ token, user: { name: user.name, email } });
 };
 
 // ********************************************************
