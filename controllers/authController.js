@@ -69,8 +69,18 @@ const logout = async (req, res) => {
 
 // ********************************************************
 
+// Check if user is logged in
+const getCurrent = (req, res) => {
+  const { email } = req.user;
+
+  res.json({ email });
+};
+
+// ********************************************************
+
 export default {
   register: controllerWrapper(register),
   login: controllerWrapper(login),
   logout: controllerWrapper(logout),
+  getCurrent: controllerWrapper(getCurrent),
 };
