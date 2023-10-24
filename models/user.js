@@ -6,7 +6,10 @@ import emailRegexp from '../constants/user-constants.js';
 
 const userSchema = new Schema(
   {
-    name: String,
+    name: {
+      type: String,
+      required: [true, 'Name is a required field'],
+    },
     email: {
       type: String,
       set: (value) => value.toLowerCase(),
@@ -18,15 +21,6 @@ const userSchema = new Schema(
       type: String,
       minlength: 6,
       required: [true, 'Password is a required field'],
-    },
-    token: String,
-    verificationToken: {
-      type: String,
-      // required: [true, 'Verification token is missing'],
-    },
-    verify: {
-      type: Boolean,
-      default: false,
     },
   },
   { versionKey: false, timestamps: true }

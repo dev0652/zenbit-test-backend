@@ -14,11 +14,7 @@ authRouter.post(
   controller.register
 );
 
-authRouter.get('/verify/:verificationToken', controller.verify);
-
 authRouter.post('/login', validateBody(schemas.loginSchema), controller.login);
-
-authRouter.get('/current', authenticate, authenticate, controller.getCurrent);
 
 authRouter.post('/logout', authenticate, authenticate, controller.logout);
 
