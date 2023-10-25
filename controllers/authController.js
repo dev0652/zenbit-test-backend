@@ -61,7 +61,7 @@ const login = async (req, res) => {
 
 // Log out
 const logout = async (req, res) => {
-  const { email } = req.body;
+  const { email, password } = req.body;
 
   const user = await User.findOne({ email });
   if (!user) throw HttpError(404, 'User not found');
@@ -75,9 +75,9 @@ const logout = async (req, res) => {
 
 // Check if user is logged in
 const getCurrent = (req, res) => {
-  const { email } = req.user;
+  const { name, email } = req.user;
 
-  res.json({ email });
+  res.json({ user: { name, email } });
 };
 
 // ********************************************************
