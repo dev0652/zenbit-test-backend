@@ -22,6 +22,7 @@ const userSchema = new Schema(
       minlength: 6,
       required: [true, 'Password is a required field'],
     },
+    token: String,
   },
   { versionKey: false, timestamps: true }
 );

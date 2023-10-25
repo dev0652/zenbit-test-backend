@@ -61,8 +61,12 @@ const login = async (req, res) => {
 
 // Log out
 const logout = async (req, res) => {
-  const { _id: id } = req.user;
-  await User.findByIdAndUpdate(id, { token: '' });
+  const { email } = req.body;
+
+  const user = await User.findOne({ email });
+  if (!user) throw HttpError(404, 'User not found');
+
+  await User.findByIdAndUpdate(user._id, { token: '' });
 
   res.json({ message: 'Signed out successfully' });
 };
