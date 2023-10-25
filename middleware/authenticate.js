@@ -21,16 +21,17 @@ const authenticate = async (req, res, next) => {
 
   try {
     const payload = jwt.verify(token, secret);
+    console.log('payload: ', payload);
     const { id } = payload;
 
     const user = await User.findById(id);
-    if (!user || !user.token) throw HttpError(401);
+    if (!user || !token) throw HttpError(401);
 
     req.user = user;
 
     next();
   } catch {
-    throw HttpError(401, 'Unauthorized (in authenticate.js)');
+    throw HttpError(401, 'Unauthorized');
   }
 };
 
